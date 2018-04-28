@@ -5,18 +5,18 @@
 
     <meta charset="utf-8" />
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />   
-	
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
 	<link type="text/css" href="css/bootstrap.min.css" rel="stylesheet">
 
-	
+
 	<style>
 		html, body {
 			height: 100%;
 		}
-		
+
 		.container {
-			background: url("images/weatherBackground.jpg") no-repeat center center fixed; 
+			background: url("images/weatherBackground.jpg") no-repeat center center fixed;
 			-webkit-background-size: cover;
 			-moz-background-size: cover;
 			-o-background-size: cover;
@@ -25,37 +25,37 @@
 			height: 100% !important;
 			padding-top: 60px;
 		}
-		
+
 		.center {
 			text-align: center;
 		}
-		
+
 		#lead {
 			padding-top: 20px;
 			font-weight:bold;
 		}
-		
+
 		#city-form {
 			padding-top: 60px;
 		}
-		
+
 		#city {
 			margin-right: auto;
 			margin-left:auto;
 		}
-		
+
 		#findbtn {
 			margin-top: 30px;
 		}
-	
+
 	</style>
-	
-	
+
+
 </head>
 
 <body>
 
-	
+
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
@@ -68,7 +68,7 @@
 					</div>
 				</form>
 			</div>
-			
+
 		</div>
 		<div class="row alerts" id="forecastdiv" style="display:none">
 			<div class="col-md-6 col-md-offset-3">
@@ -92,9 +92,9 @@
 			</div>
 		</div>
 	</div>
-	
-	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>	
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 	<script>
@@ -105,6 +105,7 @@
 				$.get('scraper.php?city=' + $('#city').val(), function(data) {
 					if (data == "") {
 						$("#faildiv").fadeIn();
+            console.log("failed");
 					} else {
 						$("#forecastdiv").fadeIn();
 						$('#forecast').html(data);
@@ -113,9 +114,9 @@
 			} else {
 				$('#nocitydiv').fadeIn();
 			}
-			
+
 		});
-			
+
 	</script>
 </body>
 </html>
