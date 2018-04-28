@@ -1,12 +1,12 @@
 <?php
 
-	$city = $_GET['city'];
+	$word = $_GET['city'];
 
-	$city = str_replace(" ", "-", $city);
-	// ob_start();
-	if (file_get_contents("http://www.weather-forecast.com/locations/".$city."/forecasts/latest")) {
-		$content = file_get_contents("http://www.weather-forecast.com/locations/".$city."/forecasts/latest");
-		preg_match('/</span><p class="b-forecast__table-description-content"><span class="phrase">(.*?)</s',
+	$word = str_replace(" ", "-", $word);
+	ob_start();
+	if (file_get_contents("http://www.dictionary.com/browse/".$word."?s=t")) {
+		$content = file_get_contents("http://www.dictionary.com/browse/".$word."?s=t");
+		preg_match('/<div class="def-set"><span class="def-number">1.</span><div class="def-content">(.*?)</s',
 			$content,
 			$matches);
 		echo $matches[1];
