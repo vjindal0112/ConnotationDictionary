@@ -9,7 +9,7 @@
 		preg_match('/"(1-3 days)"<\/span><p class="b-forecast__table-description-content"><span class="phrase">(.*?)</i',
 			$content,
 			$matches);
-		echo "got it";
+		echo $matches[1];
 	} else {
 		ob_end_clean();
 		echo "";
