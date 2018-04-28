@@ -6,7 +6,7 @@
 	ob_start();
 	if (file_get_contents("http://www.weather-forecast.com/locations/".$city."/forecasts/latest")) {
 		$content = file_get_contents("http://www.weather-forecast.com/locations/".$city."/forecasts/latest");
-		preg_match('/</h2>(1&ndash;3 days)</span><p class="b-forecast__table-description-content"><span class="phrase">(.*?)</i',
+		preg_match('/</h2>(1&ndash;3 days)</span><p class="b-forecast__table-description-content"><span class="phrase">(.*?)</s',
 			$content,
 			$matches);
 		echo $matches[1];
