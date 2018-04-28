@@ -80,7 +80,7 @@
 		<div class="row alerts" id="faildiv" style="display:none">
 			<div class="col-md-6 col-md-offset-3">
 				<div class="alert alert-danger">
-					<p id="fail">Could not find any data for that city. Please try again</p>
+					<p id="fail">Could not find any data for that word. Please try again</p>
 				</div>
 			</div>
 		</div>
