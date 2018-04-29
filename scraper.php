@@ -9,8 +9,8 @@ require_once 'vadersentiment.php';
 		preg_match_all('/<span class="def-number">[0-9].<\/span>\s*<div class="def-content">(.*?)</s',
 			$content,
 			$matches);
-		$analyzer = new SentimentIntensityAnalyzer();
-		$result = getSentiment($matches[1][0]);
+		$analyzer = new new SentimentIntensityAnalyzer();
+		$result = $analyzer->getSentiment($matches[1][0]);
 		echo $result;
 		// $ex = "python parseText.py " . "\"stuff\"";
 		// $result = shell_exec($ex);
