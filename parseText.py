@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import sys
 # import urllib2
