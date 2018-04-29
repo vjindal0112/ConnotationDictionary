@@ -1,5 +1,5 @@
 <?php
-require 'php-vadersentiment.vadersentiment.php';
+require '/php-vadersentiment/vadersentiment.php';
 	$word = $_GET['word'];
 
 	$word = str_replace(" ", "-", $word);
