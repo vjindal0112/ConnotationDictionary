@@ -10,7 +10,7 @@ require_once 'vadersentiment.php';
 			$content,
 			$matches);
 		$analyzer = new SentimentIntensityAnalyzer();
-		$result = analyzer.getSentiment($matches[1][0]);
+		$result = analyzer->getSentiment($matches[1][0]);
 		echo $result;
 		// $ex = "python parseText.py " . "\"stuff\"";
 		// $result = shell_exec($ex);
