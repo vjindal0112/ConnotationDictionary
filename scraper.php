@@ -1,5 +1,5 @@
 <?php
-require_once 'vadersentiment.php';
+require_once "vadersentiment.php";
 	$word = $_GET['word'];
 
 	$word = str_replace(" ", "-", $word);
@@ -9,7 +9,7 @@ require_once 'vadersentiment.php';
 		preg_match_all('/<span class="def-number">[0-9].<\/span>\s*<div class="def-content">(.*?)</s',
 			$content,
 			$matches);
-		$analyzer = new new SentimentIntensityAnalyzer();
+		$analyzer = new SentimentIntensityAnalyzer();
 		$result = $analyzer->getSentiment($matches[1][0]);
 		echo $result;
 		// $ex = "python parseText.py " . "\"stuff\"";
