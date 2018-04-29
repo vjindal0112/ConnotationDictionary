@@ -16,7 +16,6 @@
 
 		// $nums = $_GET["nums"];
 		// echo $nums[0]
-		/*send as argument ie python python.py message */
 	} else {
 		ob_end_clean();
 		echo "";
