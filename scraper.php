@@ -9,11 +9,11 @@ require 'php-vadersentiment.vadersentiment.php';
 		preg_match_all('/<span class="def-number">[0-9].<\/span>\s*<div class="def-content">(.*?)</s',
 			$content,
 			$matches);
-		$result = getSentiment($matches[1][0])
+		$result = getSentiment($matches[1][0]);
+		echo $result;
 		// $ex = "python parseText.py " . "\"stuff\"";
 		// $result = shell_exec($ex);
 		// $result = shell_exec('ls');
-		echo $result;
 
 		// $nums = $_GET["nums"];
 		// echo $nums[0]
