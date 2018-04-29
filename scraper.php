@@ -9,7 +9,7 @@
 		preg_match_all('/<span class="def-number">[0-9].<\/span>\s*<div class="def-content">(.*?)</s',
 			$content,
 			$matches);
-		echo $matches;
+		echo "hello";
 		/*send as argument ie python python.py message */
 	} else {
 		ob_end_clean();

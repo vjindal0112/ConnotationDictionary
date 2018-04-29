@@ -38,8 +38,5 @@
 	</main>
 	<script src="jquery.js"></script>
 	<script src="app.js"></script>
-	<script>
-
-	</script>
 </body>
 </html>

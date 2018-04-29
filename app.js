@@ -1,5 +1,6 @@
   $(document).ready(function() {
-    $('.search-btn').on("click", function(event) {
+    $('.search-btn').click(function(event) {
+      console.log("button working");
 			event.preventDefault();
       $("#searchTerm").val("");
       $(".popUpPage").css("display", "flex");
@@ -7,8 +8,10 @@
 			if ($('#searchTerm').val() != "") {
 				$.get('scraper.php?word=' + $('#searchTerm').val(), function(data) {
 					if (data == "") {
+            console.log("failed to get");
 					} else {
 						$('#theDefinition').html(data);
+            console.log($('#theDefinition').html());
 					}
 				});
 			} else {
