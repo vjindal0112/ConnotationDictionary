@@ -13,7 +13,6 @@
             console.log($('#theDefinition').html());
 					}
 				});
-        $('#searchTerm').val("");
 			} else {
 				// $('#nocitydiv').fadeIn();
 			}
