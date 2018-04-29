@@ -9,7 +9,8 @@
 		preg_match_all('/<span class="def-number">[0-9].<\/span>\s*<div class="def-content">(.*?)</s',
 			$content,
 			$matches);
-		echo `python parseText.py $matches[1][0]`;
+		exec('python parseText.py $matches[1]', $output, $ret_code);
+		echo $output
 		/*send as argument ie python python.py message */
 	} else {
 		ob_end_clean();

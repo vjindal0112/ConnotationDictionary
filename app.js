@@ -9,7 +9,7 @@
 					if (data == "") {
             console.log("failed to get");
 					} else {
-						$('#theDefinition').html(data);
+						$('#theDefinition').html(data[0]);
             console.log($('#theDefinition').html());
 					}
 				});
