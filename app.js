@@ -1,5 +1,5 @@
   $(document).ready(function() {
-    $('.search-btn').click(function(event) {
+    $('.search-btn').on("click", function(event) {
 			event.preventDefault();
       $("#searchTerm").val("");
       $(".popUpPage").css("display", "flex");
