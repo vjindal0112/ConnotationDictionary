@@ -6,7 +6,7 @@
 	ob_start();
 	if (file_get_contents("http://www.dictionary.com/browse/".$word."?s=t")) {
 		$content = file_get_contents("http://www.dictionary.com/browse/".$word."?s=t");
-		preg_match('/<span class="def-number">1.<\/span><div class="def-content">(.*?)</s',
+		preg_match('/<span class="def-number">1.<\/span>\s*<div class="def-content">(.*?)</s',
 			$content,
 			$matches);
 		echo $matches[1];
