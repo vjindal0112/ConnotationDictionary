@@ -3,7 +3,7 @@
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 # import sys
 # import urllib2
-# analyzer = SentimentIntensityAnalyzer()
+analyzer = SentimentIntensityAnalyzer()
 list = []
 # for x in range(1, len(sys.argv)):
     # list.append(analyzer.polarity_scores(sys.argv[x])["compound"])
