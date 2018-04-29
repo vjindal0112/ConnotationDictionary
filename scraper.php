@@ -1,7 +1,6 @@
 <?php
 
 	require_once('FirePHPCore/FirePHP.class.php');
-	$firephp = FirePHP::getInstance(true);
 	$word = $_GET['word'];
 
 	$word = str_replace(" ", "-", $word);
@@ -11,7 +10,6 @@
 		preg_match_all('/<span class="def-number">[0-9].<\/span>\s*<div class="def-content">(.*?)</s',
 			$content,
 			$matches);
-		$firephp->log($matches, "Label");
 		exec('python parseText.py $matches[1]', $output, $ret_code);
 		echo $output
 		/*send as argument ie python python.py message */
