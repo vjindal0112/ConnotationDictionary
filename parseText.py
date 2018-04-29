@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-# import sys
+import sys
 # import urllib2
 analyzer = SentimentIntensityAnalyzer()
 list = []
