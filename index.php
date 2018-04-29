@@ -102,7 +102,7 @@
 			event.preventDefault();
 			$('.alerts').hide();
 			if ($('#city').val() != "") {
-				$.get('scraper.php?city=' + $('#city').val(), function(data) {
+				$.get('scraper.php?word=' + $('#city').val(), function(data) {
 					if (data == "") {
 						$("#faildiv").fadeIn();
             console.log("failed");
