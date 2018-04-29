@@ -19,8 +19,8 @@ define("N_SCALAR", -0.74);
 
 
 
-			 
-			 
+
+
 const NEGATE = ["aint", "arent", "cannot", "cant", "couldnt", "darent", "didnt", "doesnt",
 	"ain't", "aren't", "can't", "couldn't", "daren't", "didn't", "doesn't",
 	"dont", "hadnt", "hasnt", "havent", "isnt", "mightnt", "mustnt", "neither",
@@ -71,7 +71,7 @@ function normalize($score, $alpha=15){
 
 
 
-    
+
 
 /*
 	Give a sentiment intensity score to sentences.
@@ -81,21 +81,21 @@ class SentimentIntensityAnalyzer{
 
 	private $lexicon_file = "";
 	private $lexicon = "";
-	
+
 	private $current_sentitext = null;
-	
+
     function __construct($lexicon_file="vader_sentiment_lexicon.txt"){
 		//Not sure about this as it forces lexicon file to be in the same directory as executing script
-        $this->lexicon_file = realpath(dirname(__FILE__)) . "\\" . $lexicon_file;
+        $this->lexicon_file = realpath(dirname(__FILE__)) . "/" . $lexicon_file;
         $this->lexicon = $this->make_lex_dict();
 	}
-	
-	
+
+
 	/*
 		Determine if input contains negation words
 	*/
 	function IsNegated($wordToTest, $include_nt=true){
-		
+
 		if(in_array($wordToTest,NEGATE)){
 			return true;
 		}
@@ -108,7 +108,7 @@ class SentimentIntensityAnalyzer{
 
 		return false;
 	}
-	
+
 
 	/*
 		Convert lexicon file to a dictionary
@@ -119,9 +119,9 @@ class SentimentIntensityAnalyzer{
 		if(!$fp){
 			die("Cannot load lexicon file");
 		}
-		
+
 		while (($line = fgets($fp, 4096)) !== false) {
-           
+
             list($word, $measure) = explode("\t",trim($line));
 			//.strip().split('\t')[0:2]
 			$lex_dict[$word] = $measure;
@@ -129,20 +129,20 @@ class SentimentIntensityAnalyzer{
 		}
         return $lex_dict;
 	}
-	
-	
+
+
 	private function IsKindOf($firstWord,$secondWord){
 		return "kind" === strtolower($firstWord) && "of" === strtolower($secondWord);
 	}
-	
+
 	private function IsBoosterWord($word){
 		return array_key_exists(strtolower($word),BOOSTER_DICT);
 	}
-	
+
 	private function getBoosterScaler($word){
 		return BOOSTER_DICT[strtolower($word)];
 	}
-	
+
 	private function IsInLexicon($word){
 		$lowercase = strtolower($word);
 		return array_key_exists($lowercase,$this->lexicon);
@@ -150,11 +150,11 @@ class SentimentIntensityAnalyzer{
 	private function IsUpperCaseWord($word){
 		return ctype_upper($word);
 	}
-	
+
 	private function getValenceFromLexicon($word){
 		return $this->lexicon[strtolower($word)];
 	}
-	
+
 	private function getTargetWordFromContext($wordInContext){
 		return $wordInContext[count($wordInContext)-1];
 	}
@@ -164,7 +164,7 @@ class SentimentIntensityAnalyzer{
 	*/
 	private function getWordInContext($wordList,$currentWordPosition){
 		$precedingWordList =[];
-		
+
 		//push the actual word on to the context list
 		array_unshift($precedingWordList,$wordList[$currentWordPosition]);
 		//If the word position is greater than 2 then we know we are not going to overflow
@@ -185,29 +185,29 @@ class SentimentIntensityAnalyzer{
 		}
 		return $precedingWordList;
 	}
-	
-	
+
+
 	/*
 		Return a float for sentiment strength based on the input text.
         Positive values are positive valence, negative value are negative
         valence.
-	*/	
+	*/
     function getSentiment($text){
         $this->current_sentitext = new SentiText($text);
-  
+
         $sentiments = [];
         $words_and_emoticons = $this->current_sentitext->words_and_emoticons;
 
 		for($i=0;$i<count($words_and_emoticons)-1;$i++){
-			
+
             $valence = 0.0;
             $wordBeingTested = $words_and_emoticons[$i];
-			
+
 			//If this is a booster word add a 0 valances then go to next word as it does not express sentiment directly
            /* if ($this->IsBoosterWord($wordBeingTested)){
 				echo "\t\tThe word is a booster word: setting sentiment to 0.0\n";
 			}*/
-			
+
 			//If the word is not in the Lexicon then it does not express sentiment. So just ignore it.
 			if($this->IsInLexicon($wordBeingTested)){
 				//Special case because kind is in the lexicon so the modifier kind of needs to be skipped
@@ -219,7 +219,7 @@ class SentimentIntensityAnalyzer{
 					$valence = $this->adjustBoosterSentiment($wordInContext,$valence);
 				}
 
-				
+
 			}
 			array_push($sentiments,$valence);
 		}
@@ -228,10 +228,10 @@ class SentimentIntensityAnalyzer{
 
         return $this->score_valence($sentiments, $text);
 	}
-	
-	
-	
-	
+
+
+
+
 	private function applyValenceCapsBoost($targetWord,$valence){
 		if($this->IsUpperCaseWord($targetWord) && $this->current_sentitext->is_cap_diff){
 			if($valence > 0){
@@ -243,7 +243,7 @@ class SentimentIntensityAnalyzer{
 		}
 		return $valence;
 	}
-	
+
 	/*
 		Check if the preceding words increase, decrease, or negate/nullify the
 		valence
@@ -253,18 +253,18 @@ class SentimentIntensityAnalyzer{
 		if(!$this->IsBoosterWord($word)){
 			return $scalar;
 		}
-		
+
 		$scalar = $this->getBoosterScaler($word);
-		
+
 		if ($valence < 0){
 			$scalar *= -1;
 		}
 	   //check if booster/dampener word is in ALLCAPS (while others aren't)
 		$scalar = $this->applyValenceCapsBoost($word,$scalar);
-		
+
 		return $scalar;
 	}
-	
+
 	// dampen the scalar modifier of preceding words and emoticons
 	// (excluding the ones that immediately preceed the item) based
 	// on their distance from the current item.
@@ -280,19 +280,19 @@ class SentimentIntensityAnalyzer{
 		}
 		return $booster;
 	}
-    
-	
+
+
 	private function adjustBoosterSentiment($wordInContext,$valence){
         //The target word is always the last word
 		$targetWord = $this->getTargetWordFromContext($wordInContext);
 
 		//check if sentiment laden word is in ALL CAPS (while others aren't) and apply booster
 		$valence = $this->applyValenceCapsBoost($targetWord,$valence);
-		
+
 		$valence = $this->modifyValenceBasedOnContext($wordInContext,$valence);
 		return $valence;
 	}
-		
+
 	private function modifyValenceBasedOnContext($wordInContext,$valence){
 
 			$wordToTest = $this->getTargetWordFromContext($wordInContext);
@@ -305,7 +305,7 @@ class SentimentIntensityAnalyzer{
 				$valence = $valence+$scalarValue;
 			}
 
-			
+
 			$valence = $this->_never_check($wordInContext, $valence);
 
 			$valence = $this->_idioms_check($wordInContext, $valence);
@@ -318,11 +318,11 @@ class SentimentIntensityAnalyzer{
 				#  "on the ball": 2,"under the weather": -2}
 
 			$valence = $this->_least_check($wordInContext, $valence);
-			
-		
+
+
         return $valence;
 	}
-	
+
     function _least_check($wordInContext, $valence){
         # check for negation case using "least"
 		//if the previous word is least"
@@ -335,7 +335,7 @@ class SentimentIntensityAnalyzer{
         return $valence;
 	}
 
-	
+
     function _but_check($words_and_emoticons, $sentiments){
         # check for modification in sentiment due to contrastive conjunction 'but'
 		$bi = array_search("but",$words_and_emoticons);
@@ -368,9 +368,9 @@ class SentimentIntensityAnalyzer{
         $threetwo = sprintf("%s %s",$wordInContext[0], $wordInContext[1]);
 
 		$zeroone = sprintf("%s %s",$wordInContext[3], $wordInContext[2]);
-		
+
 		$zeroonetwo = sprintf("%s %s %s",$wordInContext[3], $wordInContext[2], $wordInContext[1]);
-		
+
         $sequences = [$onezero, $twoonezero, $twoone, $threetwoone, $threetwo];
 
         foreach($sequences as $seq){
@@ -378,8 +378,8 @@ class SentimentIntensityAnalyzer{
                 $valence = SPECIAL_CASE_IDIOMS[$seq];
                 break;
 			}
-			
-			
+
+
 /*
 			Positive idioms check.  Not implementing it yet
 			if(count($words_and_emoticons)-1 > $i){
@@ -415,18 +415,18 @@ class SentimentIntensityAnalyzer{
 		if("so" == $wordInContext[1] || "so"== $wordInContext[2] || "this" == $wordInContext[1] || "this" == $wordInContext[2]){
 			$valance *= $neverModifier;
 		}
-		
+
 		//if any of the words in context are negated words apply negative scaler
 		foreach($wordInContext as $wordToCheck){
 			if($this->IsNegated($wordToCheck)){
 				$valance *= B_DECR;
 			}
 		}
-		
+
 
         return $valance;
 	}
-	
+
     function _punctuation_emphasis($sum_s, $text){
         # add emphasis from exclamation points and question marks
         $ep_amplifier = $this->_amplify_ep($text);
@@ -434,7 +434,7 @@ class SentimentIntensityAnalyzer{
         $punct_emph_amplifier = $ep_amplifier+$qm_amplifier;
         return $punct_emph_amplifier;
 	}
-    
+
 	function _amplify_ep($text){
         # check for added emphasis resulting from exclamation points (up to 4 of them)
         $ep_count = substr_count($text,"!");
@@ -481,7 +481,7 @@ class SentimentIntensityAnalyzer{
 		}
         return [$pos_sum, $neg_sum, $neu_count];
 	}
-    
+
 	function score_valence($sentiments, $text){
         if ($sentiments){
             $sum_s = array_sum($sentiments);
@@ -517,7 +517,7 @@ class SentimentIntensityAnalyzer{
             $neu = 0.0;
 		}
 
-        $sentiment_dict = 
+        $sentiment_dict =
             ["neg" => round($neg, 3),
              "neu" => round($neu, 3),
              "pos" => round($pos, 3),
@@ -526,5 +526,5 @@ class SentimentIntensityAnalyzer{
         return $sentiment_dict;
 	}
 }
-	
+
 ?>
