@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
-from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+# from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import sys
 # import urllib2
-analyzer = SentimentIntensityAnalyzer()
+# analyzer = SentimentIntensityAnalyzer()
 list = []
 print("hello")
 # for x in range(1, len(sys.argv)):
