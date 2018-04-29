@@ -10,10 +10,11 @@
 			$content,
 			$matches);
 		// $result = shell_exec('python parseText.py ' . $matches[1][0]);
-		// echo $result;
+		$result = shell_exec('ls');
+		echo $result;
 
-		$nums = $_GET["nums"];
-		echo $nums[0]
+		// $nums = $_GET["nums"];
+		// echo $nums[0]
 		/*send as argument ie python python.py message */
 	} else {
 		ob_end_clean();
