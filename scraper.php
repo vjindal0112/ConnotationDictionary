@@ -1,6 +1,5 @@
 <?php
 
-	require_once('FirePHPCore/FirePHP.class.php');
 	$word = $_GET['word'];
 
 	$word = str_replace(" ", "-", $word);
@@ -12,6 +11,7 @@
 			$matches);
 		$result = shell_exec('python parseText.py ' . matches[1]);
 		echo $result;
+
 		// $nums = $_GET["nums"];
 		// echo $nums[0]
 		/*send as argument ie python python.py message */
