@@ -1,5 +1,5 @@
 <?php
-require(dirname(__FILE__).'/phpvadersentiment/vadersentiment.php');
+require('vadersentiment.php');
 	$word = $_GET['word'];
 
 	$word = str_replace(" ", "-", $word);
