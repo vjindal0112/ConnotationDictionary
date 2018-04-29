@@ -2,7 +2,6 @@
     $('.search-btn').click(function(event) {
       console.log("button working");
 			event.preventDefault();
-      $("#searchTerm").val("");
       $(".popUpPage").css("display", "flex");
 			// $('.alerts').hide();
 			if ($('#searchTerm').val() != "") {
@@ -14,6 +13,7 @@
             console.log($('#theDefinition').html());
 					}
 				});
+        $('#searchTerm').val("");
 			} else {
 				// $('#nocitydiv').fadeIn();
 			}
