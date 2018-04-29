@@ -39,21 +39,6 @@
 	<script src="jquery.js"></script>
 	<script src="app.js"></script>
 	<script>
-		$('.search-btn').click(function(event) {
-			event.preventDefault();
-			// $('.alerts').hide();
-			if ($('#searchTerm').val() != "") {
-				$.get('scraper.php?word=' + $('#searchTerm').val(), function(data) {
-					if (data == "") {
-					} else {
-						$('#definition').html(data);
-					}
-				});
-			} else {
-				// $('#nocitydiv').fadeIn();
-			}
-
-		});
 
 	</script>
 </body>
