@@ -9,8 +9,8 @@
 		preg_match_all('/<span class="def-number">[0-9].<\/span>\s*<div class="def-content">(.*?)</s',
 			$content,
 			$matches);
-		// $result = shell_exec('python parseText.py ' . $matches[1][0]);
-		$result = shell_exec('ls');
+		$result = shell_exec('python parseText.py ' . "this is a test");
+		// $result = shell_exec('ls');
 		echo $result;
 
 		// $nums = $_GET["nums"];
