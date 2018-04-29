@@ -1,5 +1,5 @@
 <?php
-require('vadersentiment.php');
+include 'vadersentiment.php';
 	$word = $_GET['word'];
 
 	$word = str_replace(" ", "-", $word);
