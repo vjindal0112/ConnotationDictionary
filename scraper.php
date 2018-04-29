@@ -1,5 +1,5 @@
 <?php
-
+require('php-vadersentiment.vadersentiment.php');
 	$word = $_GET['word'];
 
 	$word = str_replace(" ", "-", $word);
@@ -9,8 +9,9 @@
 		preg_match_all('/<span class="def-number">[0-9].<\/span>\s*<div class="def-content">(.*?)</s',
 			$content,
 			$matches);
-		$ex = "python parseText.py " . "\"stuff\"";
-		$result = shell_exec($ex);
+		$result = getSentiment($matches[1][0])
+		// $ex = "python parseText.py " . "\"stuff\"";
+		// $result = shell_exec($ex);
 		// $result = shell_exec('ls');
 		echo $result;
 
